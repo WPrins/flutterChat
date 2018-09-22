@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
 const String _name = "Wessel Prins";
 
@@ -10,6 +11,9 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = new TextEditingController();
+
+  int _currentIndex = 1;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,18 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             decoration: new BoxDecoration(color: Theme.of(context).cardColor),
             child: _buildTextComposer(),
           ),
+        new IndexedStack(
+        index: _currentIndex,
+        children: <Widget>[
+          new SignInDemo(),
+          new ChatScreen(),
+          new SignInDemo(),
+        ],
+      ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-       currentIndex: 1, // this will be set when a new tab is tapped
+         // this will be set when a new tab is tapped
        items: [
          BottomNavigationBarItem(
            icon: new Icon(Icons.home),
